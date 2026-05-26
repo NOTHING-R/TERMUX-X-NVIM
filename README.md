@@ -23,9 +23,11 @@ A fully featured, minimal, and beautiful **Neovim** configuration built on [Lazy
 ### Step 1 — Download Termux APK from GitHub
 
 1. Open your Android browser and go to:
+
    ```
    https://github.com/termux/termux-app/releases/latest
    ```
+
 2. Scroll down to **Assets** and download the correct APK for your device:
 
    | File | Use When |
@@ -38,14 +40,20 @@ A fully featured, minimal, and beautiful **Neovim** configuration built on [Lazy
 
 ### Step 2 — First-Time Termux Setup
 
-Open Termux and run these commands to update the package list and install essential tools:
+The very first thing you should do after opening Termux for the first time is grant storage access. This allows Termux to read and write files in your Android storage (Downloads, Documents, etc.):
+
+```bash
+termux-setup-storage
+```
+
+> A permission dialog will appear — tap **Allow**. Without this, Termux cannot access your phone's internal storage.
+
+Then update the package list and install essential tools:
 
 ```bash
 pkg update && pkg upgrade -y
 pkg install git curl wget -y
 ```
-
-> Allow storage access when prompted, or run `termux-setup-storage` to grant it manually.
 
 ---
 
@@ -72,6 +80,9 @@ pkg install lua-language-server -y
 
 # markdown-toc (for the TOC keymap to work)
 npm install -g markdown-toc
+
+# live-server (for the <leader>bs live-reload feature)
+npm install -g live-server
 ```
 
 Verify Neovim is installed:
@@ -84,35 +95,23 @@ nvim --version
 
 ## 📦 Cloning and Setting Up This Config
 
-### Step 1 — Back Up Any Existing Neovim Config
+The easiest way to install is using the included `install.sh` script — it handles everything automatically: backing up any existing config, creating the required directories, cloning the repo, and copying the config into place.
 
-If you already have a Neovim config, back it up first:
-
-```bash
-mv ~/.config/nvim ~/.config/nvim.bak
-```
-
-### Step 2 — Clone This Repository
+### One-Command Install
 
 ```bash
-git clone https://github.com/NOTHING-R/TERMUX-X-NVIM.git
+curl -fsSL https://raw.githubusercontent.com/NOTHING-R/TERMUX-X-NVIM/main/install.sh | bash
 ```
 
-### Step 3 — Copy the Config into Place
-
-Neovim looks for its config in `~/.config/nvim/`. Copy the `nvim` folder from the repo there:
+Or if you have already cloned the repo manually:
 
 ```bash
-cp -r TERMUX-X-NVIM/nvim ~/.config/nvim
+bash ~/TERMUX-X-NVIM/install.sh
 ```
 
-Or if you want to keep it as a git repo and symlink it:
+> The script will back up any existing Neovim config to `~/.config/nvim.bak` before making any changes, so nothing is lost.
 
-```bash
-ln -s ~/TERMUX-X-NVIM/nvim ~/.config/nvim
-```
-
-### Step 4 — Launch Neovim
+### Launch Neovim
 
 ```bash
 nvim
