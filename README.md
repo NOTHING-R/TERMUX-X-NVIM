@@ -7,8 +7,7 @@ A fully featured, minimal, and beautiful **Neovim** configuration built on [Lazy
 ## 📋 Table of Contents
 
 - [Installing Termux on Android](#-installing-termux-on-android)
-- [Installing Neovim in Termux](#-installing-neovim-in-termux)
-- [Cloning and Setting Up This Config](#-cloning-and-setting-up-this-config)
+- [Installing Neovim + Setting Up This Config](#-installing-neovim--setting-up-this-config)
 - [Vim vs Neovim — What's the Difference?](#-vim-vs-neovim--whats-the-difference)
 - [How to Use Vim / Neovim](#-how-to-use-vim--neovim)
 - [The Leader Key](#-the-leader-key)
@@ -57,45 +56,9 @@ pkg install git curl wget -y
 
 ---
 
-## ⚡ Installing Neovim in Termux
+## ⚡ Installing Neovim + Setting Up This Config
 
-```bash
-pkg install neovim -y
-```
-
-Also install supporting tools used by this config:
-
-```bash
-# Node.js (required for LSP servers, live-server, Copilot)
-pkg install nodejs -y
-
-# Python (required for pyright LSP)
-pkg install python -y
-
-# Ripgrep (for Telescope live grep)
-pkg install ripgrep -y
-
-# Lua formatter (optional but recommended)
-pkg install lua-language-server -y
-
-# markdown-toc (for the TOC keymap to work)
-npm install -g markdown-toc
-
-# live-server (for the <leader>bs live-reload feature)
-npm install -g live-server
-```
-
-Verify Neovim is installed:
-
-```bash
-nvim --version
-```
-
----
-
-## 📦 Cloning and Setting Up This Config
-
-The easiest way to install is using the included `install.sh` script — it handles everything automatically: backing up any existing config, creating the required directories, cloning the repo, and copying the config into place.
+Everything is handled by a single install script — Neovim, all required packages, npm tools, and the config itself. You do not need to run anything manually.
 
 ### One-Command Install
 
@@ -103,15 +66,23 @@ The easiest way to install is using the included `install.sh` script — it hand
 curl -fsSL https://raw.githubusercontent.com/NOTHING-R/TERMUX-X-NVIM/main/install.sh | bash
 ```
 
-Or if you have already cloned the repo manually:
+That's it. The script will do the following in order:
 
-```bash
-bash ~/TERMUX-X-NVIM/install.sh
-```
+1. Update Termux packages (`pkg update && pkg upgrade`)
+2. Install `git`, `curl`, `wget`
+3. Install `neovim`
+4. Install `nodejs`, `python`, `ripgrep`, `lua-language-server`
+5. Install `markdown-toc` and `live-server` via npm
+6. Create `~/.config` if it doesn't exist
+7. Back up any existing Neovim config to `~/.config/nvim.bak`
+8. Clone this repository
+9. Copy the config into `~/.config/nvim`
 
-> The script will back up any existing Neovim config to `~/.config/nvim.bak` before making any changes, so nothing is lost.
+> If you already ran the script before, it is safe to run again — it will pull the latest changes and re-copy the config.
 
 ### Launch Neovim
+
+Once the script finishes:
 
 ```bash
 nvim
@@ -120,8 +91,11 @@ nvim
 On the first launch, **lazy.nvim** (the plugin manager) will automatically bootstrap itself and install all plugins. This may take a minute or two depending on your internet connection. Wait for it to finish, then restart Neovim:
 
 ```bash
-# Press q to close the lazy.nvim window, then quit and reopen
+# When the plugin window is done, press q, then run:
 :qa
+```
+
+```bash
 nvim
 ```
 
