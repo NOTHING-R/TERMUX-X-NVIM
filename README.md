@@ -69,14 +69,16 @@ curl -fsSL https://raw.githubusercontent.com/NOTHING-R/TERMUX-X-NVIM/main/instal
 That's it. The script will do the following in order:
 
 1. Update Termux packages (`pkg update && pkg upgrade`)
-2. Install `git`, `curl`, `wget`
+2. Install `git`, `curl`, `wget`, `unzip`
 3. Install `neovim`
 4. Install `nodejs`, `python`, `ripgrep`, `lua-language-server`
 5. Install `markdown-toc` and `live-server` via npm
-6. Create `~/.config` if it doesn't exist
-7. Back up any existing Neovim config to `~/.config/nvim.bak`
-8. Clone this repository
-9. Copy the config into `~/.config/nvim`
+6. Download and install **JetBrainsMono Nerd Font** (required for all icons to render correctly)
+7. Reload Termux font settings automatically
+8. Create `~/.config` if it doesn't exist
+9. Back up any existing Neovim config to `~/.config/nvim.bak`
+10. Clone this repository
+11. Copy the config into `~/.config/nvim`
 
 > If you already ran the script before, it is safe to run again — it will pull the latest changes and re-copy the config.
 
