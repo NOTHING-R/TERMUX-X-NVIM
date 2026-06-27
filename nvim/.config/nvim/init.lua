@@ -2,4 +2,5 @@
 require("config.lazy")
 require("config.toggles")
 require("config.orgextra")
-
+require("config.markdown")
+require("plugins.copilot-chat")
